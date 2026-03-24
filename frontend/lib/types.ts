@@ -5,6 +5,7 @@
 export interface Devotee {
   id: string;
   first_name: string;
+  middle_name: string | null;
   last_name: string;
   name_to_acknowledge: string | null;
   email: string | null;
@@ -50,6 +51,7 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
 export interface DevoteeSearchResult {
   id: string;
   first_name: string;
+  middle_name: string | null;
   last_name: string;
   name_to_acknowledge: string | null;
   email: string | null;
