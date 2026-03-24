@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  /* SVASA Brand Colors — warm saffron & temple gold palette */
+  --color-saffron-50: #fef9ee;
+  --color-saffron-100: #fdf0d4;
+  --color-saffron-200: #faddaa;
+  --color-saffron-300: #f6c472;
+  --color-saffron-400: #f2a73c;
+  --color-saffron-500: #ee8f19;
+  --color-saffron-600: #d97310;
+  --color-saffron-700: #b45610;
+  --color-saffron-800: #924415;
+  --color-saffron-900: #783914;
+
+  --color-temple-50: #f7f6f3;
+  --color-temple-100: #eceae3;
+  --color-temple-200: #d9d4c7;
+  --color-temple-300: #c1b8a5;
+  --color-temple-400: #a99a82;
+  --color-temple-500: #97856a;
+  --color-temple-600: #8a755e;
+  --color-temple-700: #73604f;
+  --color-temple-800: #5f5044;
+  --color-temple-900: #4e4239;
+
+  --color-ruby-500: #c0392b;
+  --color-ruby-600: #a93226;
+  --color-emerald-500: #27ae60;
+  --color-emerald-600: #219a52;
+}
+
+/* Base resets and typography */
+html {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: linear-gradient(135deg, #fef9ee 0%, #fdf0d4 50%, #f7f6f3 100%);
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-saffron-300);
+  border-radius: 3px;
+}
+
+/* Focus ring for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-saffron-500);
+  outline-offset: 2px;
+}
+
+/* Touch-friendly base sizing */
+@media (pointer: coarse) {
+  button, a, input, select, textarea {
+    min-height: 44px;
+  }
+}
