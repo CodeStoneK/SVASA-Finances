@@ -1,6 +1,8 @@
 "use client";
 
 import type { Devotee } from "./types";
+import { jsPDF } from "jspdf";
+import { saveAs } from "file-saver";
 
 interface DevoteeSummary {
   devotee: Devotee;
@@ -21,8 +23,6 @@ const fetchImageAsBase64 = async (url: string): Promise<string> => {
 
 export async function downloadAcknowledgementLetter(summary: DevoteeSummary, year: number) {
   try {
-    const { jsPDF } = await import("jspdf");
-
     const doc = new jsPDF({
       orientation: "portrait",
       unit: "in",
@@ -187,14 +187,8 @@ export async function downloadAcknowledgementLetter(summary: DevoteeSummary, yea
     const filename = `SVASA_Acknowledgement_${year}_${safeName}.pdf`;
 
     const blob = doc.output("blob");
-    const blobUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = blobUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(blobUrl);
+    
+    saveAs(blob, filename);
 
   } catch (error) {
     console.error("Error generating acknowledgement letter:", error);

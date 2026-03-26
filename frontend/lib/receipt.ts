@@ -1,5 +1,6 @@
-// import { jsPDF } from "jspdf"; // Dynamically imported to avoid Next.js client component issues
 import type { Devotee, Donation, PaymentMethod } from "./types";
+import { jsPDF } from "jspdf";
+import { saveAs } from "file-saver";
 
 /**
  * Generates a donation receipt PDF matching the SVASA template.
@@ -10,8 +11,6 @@ export async function generateReceipt(
   devotee: Devotee,
   serialNumber: number
 ) {
-  const { jsPDF } = await import("jspdf");
-
   const doc = new jsPDF({
     orientation: "portrait",
     unit: "pt",
@@ -142,16 +141,11 @@ export async function downloadReceipt(
     const doc = await generateReceipt(donation, devotee, serialNumber);
     const fileName = buildFileName(devotee, donation.donation_date);
     
-    // Create blob and force the correct filename via standard anchor tag download
+    // Create blob representing the PDF
     const blob = doc.output("blob");
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    
+    // Use file-saver to flawlessly handle Blob URL and correct filename forcing
+    saveAs(blob, fileName);
   } catch (error) {
     console.error("Error generating or downloading receipt:", error);
     throw error;
