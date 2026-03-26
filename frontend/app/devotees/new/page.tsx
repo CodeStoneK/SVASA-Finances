@@ -8,6 +8,7 @@ export default function NewDevoteePage() {
   const router = useRouter();
   const [form, setForm] = useState({
     first_name: "",
+    middle_name: "",
     last_name: "",
     name_to_acknowledge: "",
     email: "",
@@ -33,10 +34,16 @@ export default function NewDevoteePage() {
       return;
     }
 
+    if (!form.phone.trim() && !form.email.trim()) {
+      setError("Either a phone number or an email address is required");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const { error: insertError } = await supabase.from("devotees").insert({
         first_name: form.first_name.trim(),
+        middle_name: form.middle_name.trim() || null,
         last_name: form.last_name.trim(),
         name_to_acknowledge: form.name_to_acknowledge.trim() || null,
         email: form.email.trim() || null,
@@ -77,7 +84,7 @@ export default function NewDevoteePage() {
         {/* Name Fields */}
         <div className="bg-white/70 backdrop-blur-sm border border-saffron-200/50 rounded-2xl p-6 shadow-sm">
           <h3 className="text-sm font-semibold text-temple-700 mb-4">Personal Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label htmlFor="first-name" className="block text-xs font-medium text-temple-500 mb-1.5">
                 First Name <span className="text-ruby-500">*</span>
@@ -89,6 +96,18 @@ export default function NewDevoteePage() {
                 onChange={(e) => updateField("first_name", e.target.value)}
                 className="w-full px-4 py-3 bg-white/80 border-2 border-temple-200 rounded-xl focus:border-saffron-400 focus:ring-4 focus:ring-saffron-200/50 transition-all text-temple-800"
                 required
+              />
+            </div>
+            <div>
+              <label htmlFor="middle-name" className="block text-xs font-medium text-temple-500 mb-1.5">
+                Middle Name
+              </label>
+              <input
+                id="middle-name"
+                type="text"
+                value={form.middle_name}
+                onChange={(e) => updateField("middle_name", e.target.value)}
+                className="w-full px-4 py-3 bg-white/80 border-2 border-temple-200 rounded-xl focus:border-saffron-400 focus:ring-4 focus:ring-saffron-200/50 transition-all text-temple-800"
               />
             </div>
             <div>

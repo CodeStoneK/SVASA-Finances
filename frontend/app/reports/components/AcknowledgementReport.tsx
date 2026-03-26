@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import type { Donation, Devotee } from "@/lib/types";
+import { downloadAcknowledgementLetter } from "@/lib/acknowledgement";
 
 interface AcknowledgementReportProps {
   year: number;
@@ -72,9 +73,8 @@ export function AcknowledgementReport({ year }: AcknowledgementReportProps) {
     fetchAcknowledgements();
   }, [year]);
 
-  const handleGenerateLetter = (summary: DevoteeSummary) => {
-    // Placeholder action for testing
-    alert(`Generating letter for ${summary.devotee.first_name}... (Template not yet provided)`);
+  const handleGenerateLetter = async (summary: DevoteeSummary) => {
+    await downloadAcknowledgementLetter(summary, year);
   };
 
   if (isLoading) {
