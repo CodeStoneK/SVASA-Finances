@@ -85,13 +85,18 @@ export function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 h-full w-20 lg:w-64 bg-white/80 backdrop-blur-xl border-r border-saffron-200/50 z-50 flex flex-col shadow-lg shadow-saffron-100/50 transition-all duration-300">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-4 py-6 border-b border-saffron-200/30">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-saffron-400 to-saffron-600 flex items-center justify-center shadow-lg shadow-saffron-300/50 flex-shrink-0">
-          <span className="text-white font-bold text-lg">🙏</span>
+      <div className="flex flex-col items-center justify-center px-4 py-8 border-b border-saffron-200/30">
+        <div className="w-12 h-12 lg:w-[144px] lg:h-[144px] flex-shrink-0 bg-transparent flex items-center justify-center transition-all duration-300">
+          <img 
+            src="/svasa_logo_new.png" 
+            alt="SVASA Logo" 
+            className="w-full h-full object-contain"
+          />
         </div>
-        <div className="hidden lg:block">
-          <h1 className="text-lg font-bold text-temple-800 tracking-tight">SVASA</h1>
-          <p className="text-xs text-temple-500 -mt-0.5">Finances</p>
+        <div className="hidden lg:block mt-3 text-center">
+          <span className="text-[14px] font-black text-temple-800 tracking-[0.35em] uppercase hover:text-saffron-600 transition-colors">
+            Finances
+          </span>
         </div>
       </div>
 
